@@ -1,0 +1,12 @@
+{
+  "success": {
+    "username": "abishek.prajapati-ext@otolane.com",
+    "password": "UAtOtoe467%",
+    "expected": "Abishek Prajapati"
+  },
+  "error": {
+    "username": "invalidUser",
+    "password": "invalidPassword",
+    "expected": "Wrong Login Credentials"
+  }
+}
