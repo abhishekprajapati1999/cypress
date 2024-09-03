@@ -1,0 +1,56 @@
+[
+    {
+        "name": "Filter Applied: Delivery Day, Brands, RAM Size",
+        "category": "Laptop",
+        "filters": [
+            {
+                "title": "Delivery Day",
+                "value": "Get It by Tomorrow",
+                "type": "checkbox",
+                "where": "DeliveryInfo",
+                "expected": "Tomorrow"
+            },
+            {
+                "title": "Brands",
+                "value": "HP",
+                "type": "checkbox",
+                "where": "Title",
+                "expected": "HP"
+            },
+            {
+                "title": "RAM Size",
+                "value": "16 GB",
+                "type": "checkbox",
+                "where": "Title",
+                "expected": "16"
+            }
+        ]
+    },
+    {
+        "name": "Filter Applied: Delivery Day, Brands, Price",
+        "category": "Laptop",
+        "filters": [
+            {
+                "title": "Delivery Day",
+                "value": "Get It by Tomorrow",
+                "type": "checkbox",
+                "where": "DeliveryInfo",
+                "expected": "Tomorrow"
+            },
+            {
+                "title": "Brands",
+                "value": "Lenovo",
+                "type": "checkbox",
+                "where": "Title",
+                "expected": "Lenovo"
+            },
+            {
+                "title": "Price",
+                "value": {"minRange": 50000, "maxRange": 60000},
+                "type": "range",
+                "where": "Price",
+                "expected": {"minRange": 50000, "maxRange": 60000}
+            }
+        ]
+    }
+]

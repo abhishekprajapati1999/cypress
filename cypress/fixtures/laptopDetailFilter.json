@@ -1,0 +1,65 @@
+[
+    {
+        "name": "Filter Applied: Brands, RAM Size",
+        "category": "Laptop",
+        "filters": [
+            {
+                "title": "Brands",
+                "value": "HP",
+                "type": "checkbox"
+            },
+            {
+                "title": "RAM Size",
+                "value": "16 GB",
+                "type": "checkbox"
+            }
+            
+        ],
+        "expecteds": [
+            {
+                "title": "Brand",
+                "value": "HP"
+            },
+            {
+                "title": "RAM Size",
+                "value": "16"
+            }
+        ]
+    },
+    {
+        "name": "Filter Applied: Brands, RAM Size, Price",
+        "category": "Laptop",
+        "filters": [
+            {
+                "title": "Brands",
+                "value": "HP",
+                "type": "checkbox"
+            },
+            {
+                "title": "RAM Size",
+                "value": "16 GB",
+                "type": "checkbox"
+            },
+            {
+                "title": "Price",
+                "value": {"minRange": 50000, "maxRange": 60000},
+                "type": "range"
+            }
+            
+        ],
+        "expecteds": [
+            {
+                "title": "Brand",
+                "value": "HP"
+            },
+            {
+                "title": "RAM Size",
+                "value": "16"
+            },
+            {
+                "title": "Price",
+                "value": {"minRange": 50000, "maxRange": 60000}
+            }
+        ]
+    }
+]

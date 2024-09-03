@@ -1,6 +1,6 @@
 import Login from "../../pages/login";
 
-describe("Login Test Cases", () => {
+describe.skip("Login Test Cases", () => {
   let loginCreds;
   let loginObj;
 

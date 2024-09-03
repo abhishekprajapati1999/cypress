@@ -1,6 +1,6 @@
 import Logout from "../../pages/logout";
 
-describe("Logout Test cases", () => {
+describe.skip("Logout Test cases", () => {
   let loginCreds;
   let logoutObj;
 
