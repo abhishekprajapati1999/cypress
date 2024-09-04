@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Applied: Search, filter, Add to Cart  ->  Expected: Count",
+        "items": [
+            {
+                "search": "Laptop",
+                "filters": [
+                    {
+                        "title": "Brands",
+                        "value": "HP",
+                        "type": "checkbox"
+                    }
+                ]
+            },
+            {
+                "search": "Laptop",
+                "filters": [
+                    {
+                        "title": "RAM Size",
+                        "value": "16 GB",
+                        "type": "checkbox"
+                    }
+                ]
+            }
+        ],
+        "expected": 2 
+    }
+]

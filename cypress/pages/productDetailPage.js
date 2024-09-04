@@ -3,7 +3,7 @@ class ProductDetailPage {
     results: () => cy.get("div[data-component-type='s-search-result']"),
     price: () =>
       cy.get(
-        '.a-spacing-none > .a-price > [aria-hidden="true"] > .a-price-whole'
+        "span[id='tp_price_block_total_price_ww'] span[class='a-price-whole']"
       ),
     title: () => cy.get("span#productTitle"),
     technicalDetailsSection: () => cy.get("#productDetails_techSpec_section_1"),
