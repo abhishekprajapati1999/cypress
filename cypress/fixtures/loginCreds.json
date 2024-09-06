@@ -1,12 +1,12 @@
 {
   "success": {
-    "username": "abishek.prajapati-ext@otolane.com",
-    "password": "UAtOtoe467%",
-    "expected": "Abishek Prajapati"
+    "username": "",
+    "password": "",
+    "expected": "Abhishek"
   },
   "error": {
-    "username": "invalidUser",
+    "username": "invalidUser123@gmail.com",
     "password": "invalidPassword",
-    "expected": "Wrong Login Credentials"
+    "expected": "We cannot find an account with that email address"
   }
 }

@@ -1,0 +1,28 @@
+[
+    {
+        "name": "Applied: Search, filter, Add to Cart, Payment Methods  ->  Expected: Payment methods",
+        "items": [
+            {
+                "search": "Laptop",
+                "filters": [
+                    {
+                        "title": "Brands",
+                        "value": "HP",
+                        "type": "checkbox"
+                    }
+                ]
+            },
+            {
+                "search": "Laptop",
+                "filters": [
+                    {
+                        "title": "RAM Size",
+                        "value": "16 GB",
+                        "type": "checkbox"
+                    }
+                ]
+            }
+        ],
+        "expecteds": ["Credit or debit card", "Net Banking", "EMI"]
+    }
+]
