@@ -1,8 +1,14 @@
-name: End-to-end tests
-on: [push]
+name: Staging End-to-end tests
+on:
+  push:
+    branches:
+      - develop
+  workflow_dispatch:
+
 jobs:
-  cypress-run:
+  cypress-staging:
     runs-on: ubuntu-22.04
+    environment: STAGING
     container:
       image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
       options: --user 1001
@@ -13,6 +19,9 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+        env:
+          AMAZON_USERNAME: ${{env.AMAZON_USERNAME}}
+          AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: failure()
