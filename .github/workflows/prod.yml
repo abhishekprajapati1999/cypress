@@ -20,8 +20,8 @@ jobs:
         with:
           browser: chrome
         env:
-          AMAZON_USERNAME: ${{env.AMAZON_USERNAME}}
-          AMAZON_PASSWORD: ${{secrets.AMAZON_PASSWORD}}
+          USERNAME: ${{env.USERNAME}}
+          PASSWORD: ${{secrets.PASSWORD}}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: failure()
