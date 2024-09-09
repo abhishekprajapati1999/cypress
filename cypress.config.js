@@ -12,8 +12,8 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
-      const version = config.env.version || "local";
-      config.env = require(`./cypress/config/${version}.json`);
+      // const version = config.env.version || "local";
+      // config.env = require(`./cypress/config/${version}.json`);
       return config;
     },
   },
