@@ -1,27 +1,41 @@
-name: PROD End-to-end tests
+name: End-to-end tests
 on:
   push:
     branches:
+      - develop
+      - uat
       - main
   workflow_dispatch:
 
+env:
+  Environment: ${{ github.ref == 'refs/heads/main' && 'prod' || github.ref == 'refs/heads/uat' && 'uat' || 'staging' }}
+  USERNAME: ${{ github.ref == 'refs/heads/main' && secrets.AMAZON_USERNAME_PROD || github.ref == 'refs/heads/uat' && secrets.AMAZON_USERNAME_UAT || secrets.AMAZON_USERNAME_STAGING }}
+  PASSWORD: ${{ github.ref == 'refs/heads/main' && secrets.AMAZON_PASSWORD_PROD || github.ref == 'refs/heads/uat' && secrets.AMAZON_PASSWORD_UAT || secrets.AMAZON_PASSWORD_STAGING }}
+
 jobs:
-  cypress-prod:
+  cypress-uat:
     runs-on: ubuntu-22.04
-    environment: PROD
     container:
       image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
       options: --user 1001
     steps:
+      - name: Print deployment environment
+        run: |
+          echo "Deployment environment is: ${{env.Environment}}"
+          echo "Amazon Username=${{ env.USERNAME }}"
+          echo "Amazon Password=${{ env.PASSWORD }}"
+
       - name: Checkout
         uses: actions/checkout@v4   
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
         env:
           CYPRESS_USERNAME: ${{env.USERNAME}}
-          CYPRESS_PASSWORD: ${{secrets.PASSWORD}}
+          CYPRESS_PASSWORD: ${{env.PASSWORD}}
+
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: failure()
@@ -29,6 +43,7 @@ jobs:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore
+
       - name: Generate Test Report
         uses: actions/upload-artifact@v4
         if: always()
