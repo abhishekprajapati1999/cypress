@@ -35,7 +35,11 @@ describe("Amazon available payment methods test cases", () => {
     cartPage.getCartItemCount().should("eq", 1);
 
     paymentMethodPage.proceedToPaymentMethods();
+    cy.wait(6000);
     paymentMethodPage.paymentMethods("Credit or debit card").should("exist");
+    cy.go("back");
+    cy.go("back");
+    cartPage.removeAllCartItems(1);
   });
 
   it("should be able to search, filter, add to cart and check payment methods with multiple items - (Data driven test)", () => {
@@ -62,17 +66,17 @@ describe("Amazon available payment methods test cases", () => {
         cartPage.getCartItemCount().should("eq", data.items.length);
 
         paymentMethodPage.proceedToPaymentMethods();
-        cy.wait(4000)
+        cy.wait(4000);
         data.expecteds.forEach((method) => {
           paymentMethodPage.paymentMethods(method).should("exist");
         });
 
-        cy.go('back')
-        cy.go('back')
+        cy.go("back");
+        cy.go("back");
 
         cartPage.removeAllCartItems(data.items.length);
 
-        auth.signOut()
+        auth.signOut();
       });
     });
   });
