@@ -20,8 +20,8 @@ jobs:
         with:
           browser: chrome
         env:
-          USERNAME: ${{env.USERNAME}}
-          PASSWORD: ${{secrets.PASSWORD}}
+          CYPRESS_USERNAME: ${{env.USERNAME}}
+          CYPRESS_PASSWORD: ${{secrets.PASSWORD}}
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
         if: failure()
