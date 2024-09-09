@@ -13,7 +13,7 @@ env:
   PASSWORD: ${{ github.ref == 'refs/heads/main' && secrets.AMAZON_PASSWORD_PROD || github.ref == 'refs/heads/uat' && secrets.AMAZON_PASSWORD_UAT || secrets.AMAZON_PASSWORD_STAGING }}
 
 jobs:
-  cypress-uat:
+  cypress-run:
     runs-on: ubuntu-22.04
     container:
       image: cypress/browsers:node-20.14.0-chrome-126.0.6478.114-1-ff-127.0.1-edge-126.0.2592.61-1
