@@ -4,12 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cypress run --browser chrome --env version=local",
-    "start-staging": "cypress open --browser chrome --env version=local",
-    "start-uat": "cypress open --browser chrome --env version=local",
-    "start-prod": "cypress open --browser chrome --env version=local",
-    "start:headed": "cypress run --headed --browser chrome --env version=local",
-    "start:open": "cypress open --browser chrome --env version=local"
+    "start": "cypress run --browser chrome",
+    "start:headed": "cypress run --headed --browser chrome",
+    "start:open": "cypress open --browser chrome"
   },
   "author": "",
   "license": "ISC",
