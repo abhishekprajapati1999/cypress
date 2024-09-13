@@ -1,5 +1,5 @@
-import HomePage from '../../pages/homePage';
-import SearchResultsPage from '../../pages/searchResultsPage';
+import HomePage from '../../../../pages/examples/homePage';
+import SearchResultsPage from '../../../../pages/examples/searchResultsPage';
 
 const homePage = new HomePage();
 const searchResultsPage = new SearchResultsPage();

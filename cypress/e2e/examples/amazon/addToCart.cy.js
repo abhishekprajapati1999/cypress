@@ -1,8 +1,8 @@
-import CartPage from "../../pages/cart";
-import FilterPage from "../../pages/filterPage";
-import HomePage from "../../pages/homePage";
-import ProductDetailPage from "../../pages/productDetailPage";
-import SearchResultsPage from "../../pages/searchResultsPage";
+import CartPage from "../../../pages/examples/cart";
+import FilterPage from "../../../pages/examples/filterPage";
+import HomePage from "../../../pages/examples/homePage";
+import ProductDetailPage from "../../../pages/examples/productDetailPage";
+import SearchResultsPage from "../../../pages/examples/searchResultsPage";
 
 const homePage = new HomePage();
 const cartPage = new CartPage();
@@ -68,7 +68,7 @@ describe("Amazon Add to Cart Functionality", () => {
   });
 
   it("should be able to search, filter, add to cart, with multiple items - (Data driven test) - (VDP)", () => {
-    cy.fixture("addToCart").then((filter) => {
+    cy.fixture("examples/addToCart").then((filter) => {
       filter.forEach((data) => {
         cy.log(`********** ${data.name} **********`);
 

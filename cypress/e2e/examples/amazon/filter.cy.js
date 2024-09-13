@@ -1,6 +1,6 @@
-import FilterPage from "../../pages/filterPage";
-import HomePage from "../../pages/homePage";
-import SearchResultsPage from "../../pages/searchResultsPage";
+import FilterPage from "../../../pages/examples/filterPage";
+import HomePage from "../../../pages/examples/homePage";
+import SearchResultsPage from "../../../pages/examples/searchResultsPage";
 
 const homePage = new HomePage();
 const filterPage = new FilterPage();
@@ -76,7 +76,7 @@ describe("Amazon Filter Functionality", () => {
   });
 
   it("should be able to filter with multiple filters - (Data driven test)", () => {
-    cy.fixture("laptopFilter").then((filter) => {
+    cy.fixture("examples/laptopFilter").then((filter) => {
       filter.forEach((data) => {
         cy.log(`********** ${data.name} **********`);
         homePage.searchFor(data.category);

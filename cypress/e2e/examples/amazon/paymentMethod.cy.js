@@ -1,10 +1,10 @@
-import Auth from "../../pages/auth";
-import PaymentMethodPage from "../../pages/paymentMethod";
-import CartPage from "../../pages/cart";
-import FilterPage from "../../pages/filterPage";
-import HomePage from "../../pages/homePage";
-import ProductDetailPage from "../../pages/productDetailPage";
-import SearchResultsPage from "../../pages/searchResultsPage";
+import Auth from "../../../pages/examples/auth";
+import PaymentMethodPage from "../../../pages/examples/paymentMethod";
+import CartPage from "../../../pages/examples/cart";
+import FilterPage from "../../../pages/examples/filterPage";
+import HomePage from "../../../pages/examples/homePage";
+import ProductDetailPage from "../../../pages/examples/productDetailPage";
+import SearchResultsPage from "../../../pages/examples/searchResultsPage";
 
 const auth = new Auth();
 const homePage = new HomePage();
@@ -22,8 +22,8 @@ describe("Amazon available payment methods test cases", () => {
   });
 
   it("should be able to check the payment methods", () => {
-    auth.visit();
     auth.signIn(Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
+    homePage.visit();
     homePage.searchFor(search);
     filterPage.applyCheckboxFilter("Brands", "HP");
 
@@ -43,9 +43,9 @@ describe("Amazon available payment methods test cases", () => {
   });
 
   it("should be able to search, filter, add to cart and check payment methods with multiple items - (Data driven test)", () => {
-    cy.fixture("paymentMethodAvailable").then((filter) => {
-      auth.visit();
+    cy.fixture("examples/paymentMethodAvailable").then((filter) => {
       auth.signIn(Cypress.env("USERNAME"), Cypress.env("PASSWORD"));
+      homePage.visit();
       filter.forEach((data) => {
         cy.log(`********** ${data.name} **********`);
 
