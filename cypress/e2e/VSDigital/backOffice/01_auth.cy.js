@@ -16,13 +16,13 @@ describe("Auth Test Cases", () => {
   it("should be able to verify invalid login creds", () => {
     cy.intercept(
       "POST",
-      "https://vsdigitaltest.b2clogin.com/vsdigitaltest.onmicrosoft.com/B2C_1_SignUp_SignIn_Widget/SelfAsserted"
+      `${Cypress.env("BACKOFFICE_LOGIN_LINK")}/vsdigitaltest.onmicrosoft.com/B2C_1_SignUp_SignIn_Widget/SelfAsserted`
     ).as("getUser");
     homePage.visit();
     const { emailTxt, passwordTxt, loginBtn, errorTxt } = auth.elements;
 
     cy.origin(
-      "https://vsdigitaltest.b2clogin.com",
+      Cypress.env("BACKOFFICE_LOGIN_LINK"),
       { args: { emailTxt, passwordTxt, loginBtn, errorTxt } },
       ({ emailTxt, passwordTxt, loginBtn, errorTxt }) => {
         cy.get(emailTxt).clear().type("te1234@gmail.com");
@@ -58,7 +58,7 @@ describe("Auth Test Cases", () => {
     cy.wait(1000);
     auth.logout();
     cy.wait(5000);
-    cy.origin("https://vsdigitaltest.b2clogin.com", {}, () => {
+    cy.origin(Cypress.env("BACKOFFICE_LOGIN_LINK"), {}, () => {
       cy.url().should("include", "b2clogin.com");
     });
   });

@@ -1,6 +1,6 @@
-import SignUp from "../../pages/VSDigital/signup";
-import Login from "../../pages/VSDigital/login";
-import HomePage from "../../pages/VSDigital/homePage";
+import SignUp from "../../../pages/VSDigital/widgets/signup";
+import Login from "../../../pages/VSDigital/widgets/login";
+import HomePage from "../../../pages/VSDigital/widgets/homePage";
 
 const login = new Login();
 const signUp = new SignUp();
@@ -10,7 +10,7 @@ describe("Auth Test Cases", () => {
   let cred;
 
   before(() => {
-    cy.fixture("VSDigital/signUpDetails").then((data) => {
+    cy.fixture("VSDigital/widgets/signUpDetails").then((data) => {
       cred = data;
     });
   });
@@ -73,7 +73,7 @@ describe("Auth Test Cases", () => {
     cy.wait(1000);
     login.login({ email: "te1234@gmail.com", password: "test123" });
 
-    cy.origin("https://vsdigitaltest.b2clogin.com", {}, () => {
+    cy.origin(Cypress.env("BACKOFFICE_LOGIN_LINK"), {}, () => {
       cy.get(".error.pageLevel")
         .find("p")
         .should("have.text", "We can't seem to find your account");

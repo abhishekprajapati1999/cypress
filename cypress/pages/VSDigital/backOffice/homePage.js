@@ -1,6 +1,6 @@
 class HomePage {
   elements = {
-    homePageLink: "https://vsdigital-backoffice-test.azurewebsites.net/",
+    homePageLink: Cypress.env("BACKOFFICE_LINK"),
   };
 
   visit() {

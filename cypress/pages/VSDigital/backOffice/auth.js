@@ -30,7 +30,7 @@ class Auth {
         home.visit();
         cy.wait(4000);
         cy.origin(
-          "https://vsdigitaltest.b2clogin.com",
+          Cypress.env("BACKOFFICE_LOGIN_LINK"),
           { args: { emailTxt, passwordTxt, loginBtn, email, password } },
           ({ emailTxt, passwordTxt, loginBtn, email, password }) => {
             cy.get(emailTxt).clear().type(email);
@@ -38,7 +38,7 @@ class Auth {
             cy.get(loginBtn).click();
           }
         );
-        cy.wait(5000);
+        cy.wait(7000);
         this.elements
           .selectAccount()
           .contains("label", account)
@@ -46,6 +46,9 @@ class Auth {
           .find("input")
           .check();
         this.elements.confirmAccount().click();
+      },
+      {
+        cacheAcrossSpecs: true,
       }
     );
     home.visit();

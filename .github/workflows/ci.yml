@@ -9,8 +9,8 @@ on:
 
 env:
   Environment: ${{ github.ref == 'refs/heads/main' && 'prod' || github.ref == 'refs/heads/uat' && 'uat' || 'staging' }}
-  USERNAME: ${{ github.ref == 'refs/heads/main' && secrets.AMAZON_USERNAME_PROD || github.ref == 'refs/heads/uat' && secrets.AMAZON_USERNAME_UAT || secrets.AMAZON_USERNAME_STAGING }}
-  PASSWORD: ${{ github.ref == 'refs/heads/main' && secrets.AMAZON_PASSWORD_PROD || github.ref == 'refs/heads/uat' && secrets.AMAZON_PASSWORD_UAT || secrets.AMAZON_PASSWORD_STAGING }}
+  BACKOFFICE_LOGIN_LINK: ${{ github.ref == 'refs/heads/main' && secrets.BACKOFFICE_LOGIN_LINK_PROD || github.ref == 'refs/heads/uat' && secrets.BACKOFFICE_LOGIN_LINK_UAT || secrets.BACKOFFICE_LOGIN_LINK_STAGING }}
+  BACKOFFICE_LINK: ${{ github.ref == 'refs/heads/main' && secrets.BACKOFFICE_LINK_PROD || github.ref == 'refs/heads/uat' && secrets.BACKOFFICE_LINK_UAT || secrets.BACKOFFICE_LINK_STAGING }}
 
 jobs:
   cypress-run:
@@ -32,9 +32,10 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           browser: chrome
+          spec: 'cypress/e2e/VSDigital/**/**/*.cy.js'
         env:
-          CYPRESS_USERNAME: ${{env.USERNAME}}
-          CYPRESS_PASSWORD: ${{env.PASSWORD}}
+          CYPRESS_BACKOFFICE_LOGIN_LINK: ${{env.BACKOFFICE_LOGIN_LINK}}
+          CYPRESS_BACKOFFICE_LINK: ${{env.BACKOFFICE_LINK}}
 
       - name: Upload Screenshots
         uses: actions/upload-artifact@v4
