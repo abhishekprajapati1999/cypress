@@ -58,7 +58,7 @@ describe("User Test Cases", () => {
     });
     cy.wait(5000)
     const newPhone = faker.string.numeric(10);
-    userPage.elements.inputField("Phone", newPhone);
+    userPage.elements.inputField("Phone").clear().type(newPhone);
     userPage.elements.saveLink().click();
 
     cy.wait("@updateUser").then((interception) => {
@@ -71,5 +71,18 @@ describe("User Test Cases", () => {
         phone: newPhone,
       });
     });
+  });
+
+  it("should be able to validate the user info", () => {
+    cy.fixture("VSDigital/backOffice/userDetails").then((data) => {
+      homePage.visit();
+      auth.login(cred);
+      auth.elements.usernameTxt().contains(cred.expected);
+  
+      // Navigate to Business page
+      userPage.visitEdit(data.userDetailId);
+      cy.wait(7000);
+      userPage.validateUser(data);
+    })
   });
 });

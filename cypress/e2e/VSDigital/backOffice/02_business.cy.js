@@ -90,6 +90,19 @@ describe("Business Test Cases", () => {
       expect(responseBody).to.have.property("status", "Success");
     });
   });
+
+  it("should be able to validate the business info", () => {
+    cy.fixture("VSDigital/backOffice/businessDetails.json").then((data) => {
+      homePage.visit();
+      auth.login(cred);
+      auth.elements.usernameTxt().contains(cred.expected);
+  
+      // Navigate to Business page
+      businessPage.editVisit(data.businessId);
+      cy.wait(7000);
+      businessPage.validateBusinessInfo(data);
+    })
+  });
 });
 
 

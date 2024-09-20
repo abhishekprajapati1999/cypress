@@ -12,13 +12,8 @@ class BusinessPage {
     businessListingImage: () => cy.get("input[name='businessListingImage']"),
     bookingTypeCallout: () => cy.get("#calloutBookingType"),
     bookingTypeFacility: () => cy.get("#faciltyBookingType"),
-    selectField: (field, value) =>
-      cy
-        .get(".form-group")
-        .contains("label", field)
-        .parent()
-        .find("select")
-        .select(value),
+    selectField: (field) =>
+      cy.get(".form-group").contains("label", field).parent().find("select"),
     radioField: (field, value) =>
       cy
         .get(".form-group")
@@ -26,25 +21,11 @@ class BusinessPage {
         .parent()
         .contains("label", value)
         .parent()
-        .find("input")
-        .check(),
-    inputField: (field, value) =>
-      cy
-        .get(".form-group")
-        .contains("label", field)
-        .parent()
-        .find("input")
-        .clear()
-        .type(value),
-
-    textAreaField: (field, value) =>
-      cy
-        .get(".form-group")
-        .contains("label", field)
-        .parent()
-        .find("textarea")
-        .clear()
-        .type(value),
+        .find("input"),
+    inputField: (field) =>
+      cy.get(".form-group").contains("label", field).parent().find("input"),
+    textAreaField: (field) =>
+      cy.get(".form-group").contains("label", field).parent().find("textarea"),
     noPaneltyUpTo: () =>
       cy.get("input[placeholder='Enter no penalty up to (hrs)']"),
     bookingChanges: () =>
@@ -55,7 +36,8 @@ class BusinessPage {
     continueBtn: () =>
       cy.get("div[class='modal-footer'] div button[type='button']"),
     // mobile commision
-    mobileBookingCommision: () => cy.get("#uncontrolled-tab-example-tab-mobileBookingCommission"),
+    mobileBookingCommision: () =>
+      cy.get("#uncontrolled-tab-example-tab-mobileBookingCommission"),
     businessCommissionType: () =>
       cy.get("select[name='commission.Callout.businessCommissionBasedOn']"),
     businessCommissionPercentage: () =>
@@ -68,46 +50,44 @@ class BusinessPage {
       cy.get("select[name='commission.Callout.telemedicineCommissionBasedOn']"),
     telemedicineCommissionPercentage: () =>
       cy.get("input[placeholder='Enter Telemedicine Commission']"),
-    mobileBookingCommisionSave: () => cy.get('#uncontrolled-tab-example-tabpane-mobileBookingCommission > .col-md-12 > .btn-primary'),
+    mobileBookingCommisionSave: () =>
+      cy.get(
+        "#uncontrolled-tab-example-tabpane-mobileBookingCommission > .col-md-12 > .btn-primary"
+      ),
     widgetLink: () => cy.get('a[href*="vsdigital-bookingwidget-test"]'),
   };
 
   visit() {
-    cy.visit(
-      `${Cypress.env("BACKOFFICE_LINK")}/business/new`
-    );
+    cy.visit(`${Cypress.env("BACKOFFICE_LINK")}/business/new`);
     return;
   }
 
   editVisit(id) {
-    return cy.visit(
-      `${Cypress.env("BACKOFFICE_LINK")}/business/edit/${id}`
-    );
+    return cy.visit(`${Cypress.env("BACKOFFICE_LINK")}/business/edit/${id}`);
   }
 
-  addBusiness(businessDetails) {
+  addBusiness(info) {
     cy.wait(5000);
-    this.elements.inputField("Business Name", businessDetails.businessName);
-    this.elements.selectField("Status", businessDetails.status);
-    this.elements.inputField("Phone", businessDetails.phone);
-    this.elements.inputField("Note", businessDetails.note);
+    this.elements.inputField("Business Name").clear().type(info.businessName);
+    this.elements.selectField("Status").select(info.status);
+    this.elements.inputField("Phone").clear().type(info.phone);
+    this.elements.inputField("Note").clear().type(info.note);
     this.elements.bookingTypeCallout().check();
     this.elements.bookingTypeFacility().check();
-    this.elements.radioField("Doctor Network", businessDetails.dockerNetwork);
-    this.elements.radioField("Master Business", businessDetails.masterBusiness);
+    this.elements.radioField("Doctor Network", info.dockerNetwork).check();
+    this.elements.radioField("Master Business", info.masterBusiness).check();
     this.elements.radioField(
       "Subscribed to MobileMedIV",
-      businessDetails.subscribeToMobileMedIV
+      info.subscribeToMobileMedIV
     );
-    this.elements.radioField(
-      "Can add services on their own",
-      businessDetails.addServicesOwn
-    );
-    this.elements.inputField("Tagline", businessDetails.profileTagline);
-    this.elements.textAreaField(
-      "Description",
-      businessDetails.profileDescription
-    );
+    this.elements
+      .radioField("Can add services on their own", info.addServicesOwn)
+      .check();
+    this.elements.inputField("Tagline").clear().type(info.profileTagline);
+    this.elements
+      .textAreaField("Description")
+      .clear()
+      .type(info.profileDescription);
     this.elements
       .businessProfileImage()
       .attachFile("VSDigital/image_under_2mb.jpeg");
@@ -123,88 +103,78 @@ class BusinessPage {
       .attachFile("VSDigital/image_under_2mb.jpeg");
     cy.wait(1000);
     this.elements.photoUpdateSubmitBtn().click();
-    this.elements.inputField("Address Line 1", businessDetails.addressLine1);
-    this.elements.inputField("Address Line 2", businessDetails.addressLine2);
-    this.elements.selectField("Country", businessDetails.country);
+    this.elements.inputField("Address Line 1").clear().type(info.addressLine1);
+    this.elements.inputField("Address Line 2").clear().type(info.addressLine2);
+    this.elements.selectField("Country").select(info.country);
     cy.wait(2000);
-    this.elements.selectField("State", businessDetails.state);
-    this.elements.inputField("City", businessDetails.city);
-    this.elements.inputField("Zip/PostCode", businessDetails.zip);
-    this.elements.radioField(
-      "Default Business?",
-      businessDetails.defaulyBusinesss
-    );
-    this.elements.radioField("Test Business?", businessDetails.testBusiness);
-    this.elements.inputField("Group Discount %", businessDetails.groupDiscount);
-    this.elements.inputField(
-      "No Of Person For a Group Discount",
-      businessDetails.noOfPersonGroupDiscount
-    );
-    this.elements.selectField(
-      "Platform Service Fee Type",
-      businessDetails.platformSeriveFeeType
-    );
-    cy.wait(1000)
-    this.elements.inputField(
-      "Enter Platform Service Fee Value",
-      businessDetails.platformSeriveFeeValue
-    );
-    this.elements.radioField(
-      "Allow business to take cash payments",
-      businessDetails.allowBussinesToTakeCashPayment
-    );
-    this.elements.radioField(
-      "Allow business add Membership",
-      businessDetails.allowBusinessToAddMembership
-    );
-    this.elements.radioField(
-      "Allow business keep Membership Fees",
-      businessDetails.allowBusinessKeepMemberShipFees
-    );
-    this.elements.radioField(
-      "Include Subscription",
-      businessDetails.includeSubscription
-    );
-    this.elements.radioField(
-      "Pay Subscription to",
-      businessDetails.paySubscriptionTo
-    );
-    this.elements.radioField(
-      "Allow Service Consultations?",
-      businessDetails.allowServiceConsultation
-    );
-    this.elements.radioField(
-      "Allow In Session Consultations?",
-      businessDetails.allowInServiceConsultation
-    );
-    this.elements.inputField(
-      "Minimum Price ($)",
-      businessDetails.travelMinPrice
-    );
-    this.elements.inputField(
-      "Price Per Mile ($)",
-      businessDetails.travelPricePerMile
-    );
+    this.elements.selectField("State").select(info.state);
+    this.elements.inputField("City").clear().type(info.city);
+    this.elements.inputField("Zip/PostCode").clear().type(info.zip);
     this.elements
-      .noPaneltyUpTo()
-      .first()
-      .clear()
-      .type(businessDetails.noPaneltyUpTo1);
+      .radioField("Default Business?", info.defaulyBusinesss)
+      .check();
+    this.elements.radioField("Test Business?", info.testBusiness).check();
     this.elements
-      .bookingChanges()
-      .first()
+      .inputField("Group Discount %")
       .clear()
-      .type(businessDetails.bookingChanges1);
+      .type(info.groupDiscount);
     this.elements
-      .noPaneltyUpTo()
-      .last()
+      .inputField("No Of Person For a Group Discount")
       .clear()
-      .type(businessDetails.noPaneltyUpTo2);
+      .type(info.noOfPersonGroupDiscount);
     this.elements
-      .bookingChanges()
-      .last()
+      .selectField("Platform Service Fee Type")
+      .select(info.platformSeriveFeeType);
+    cy.wait(1000);
+    this.elements
+      .inputField("Enter Platform Service Fee Value")
       .clear()
-      .type(businessDetails.bookingChanges2);
+      .type(info.platformSeriveFeeValue);
+    this.elements
+      .radioField(
+        "Allow business to take cash payments",
+        info.allowBussinesToTakeCashPayment
+      )
+      .check();
+    this.elements
+      .radioField(
+        "Allow business add Membership",
+        info.allowBusinessToAddMembership
+      )
+      .check();
+    this.elements
+      .radioField(
+        "Allow business keep Membership Fees",
+        info.allowBusinessKeepMemberShipFees
+      )
+      .check();
+    this.elements
+      .radioField("Include Subscription", info.includeSubscription)
+      .check();
+    this.elements
+      .radioField("Pay Subscription to", info.paySubscriptionTo)
+      .check();
+    this.elements
+      .radioField("Allow Service Consultations?", info.allowServiceConsultation)
+      .check();
+    this.elements
+      .radioField(
+        "Allow In Session Consultations?",
+        info.allowInServiceConsultation
+      )
+      .check();
+    this.elements
+      .inputField("Minimum Price ($)")
+      .clear()
+      .type(info.travelMinPrice);
+    this.elements
+      .inputField("Price Per Mile ($)")
+      .clear()
+      .type(info.travelPricePerMile);
+    this.elements.noPaneltyUpTo().first().clear().type(info.noPaneltyUpTo1);
+    this.elements.bookingChanges().first().clear().type(info.bookingChanges1);
+    this.elements.noPaneltyUpTo().last().clear().type(info.noPaneltyUpTo2);
+    this.elements.bookingChanges().last().clear().type(info.bookingChanges2);
     this.elements.saveBtn().click();
     cy.wait(7000);
     this.elements.continueBtn().click();
@@ -212,29 +182,147 @@ class BusinessPage {
     this.elements.cancelBtn().click({ force: true });
   }
 
-  addMobileBookingCommision(businessDetails) {
-    this.elements.mobileBookingCommision().click()
+  validateBusinessInfo(info) {
+    cy.wait(5000);
     this.elements
-      .businessCommissionType()
-      .select(businessDetails.businessCommissionType);
+      .inputField("Business Name")
+      .should("have.value", info.businessName);
+    this.elements.selectField("Status").should("have.value", info.status);
+    this.elements.inputField("Phone").should("have.value", info.phone);
+    this.elements.inputField("Note").should("have.value", info.note);
+    this.elements.bookingTypeCallout().should("be.checked");
+    this.elements.bookingTypeFacility().should("be.checked");
+    this.elements
+      .radioField("Doctor Network", info.dockerNetwork)
+      .should("be.checked");
+    this.elements
+      .radioField("Master Business", info.masterBusiness)
+      .should("be.checked");
+    this.elements
+      .radioField("Subscribed to MobileMedIV", info.subscribeToMobileMedIV)
+      .should("be.checked");
+    this.elements
+      .radioField("Can add services on their own", info.addServicesOwn)
+      .should("be.checked");
+    this.elements
+      .inputField("Tagline")
+      .should("have.value", info.profileTagline);
+    this.elements
+      .textAreaField("Description")
+      .should("have.value", info.profileDescription);
+    this.elements
+      .inputField("Address Line 1")
+      .should("have.value", info.addressLine1);
+    this.elements
+      .inputField("Address Line 2")
+      .should("have.value", info.addressLine2);
+    this.elements
+      .selectField("Country")
+      .find("option:selected")
+      .should("contain.text", info.country);
+    this.elements
+      .selectField("State")
+      .find("option:selected")
+      .should("contain.text", info.state);
+    this.elements.inputField("City").should("have.value", info.city);
+    this.elements.inputField("Zip/PostCode").should("have.value", info.zip);
+    this.elements
+      .radioField("Default Business?", info.defaulyBusinesss)
+      .should("be.checked");
+    this.elements
+      .radioField("Test Business?", info.testBusiness)
+      .should("be.checked");
+    this.elements
+      .inputField("Group Discount %")
+      .should("have.value", info.groupDiscount);
+    this.elements
+      .inputField("No Of Person For a Group Discount")
+      .should("have.value", info.noOfPersonGroupDiscount);
+    this.elements
+      .selectField("Platform Service Fee Type")
+      .find("option:selected")
+      .should("contain.text", info.platformSeriveFeeType);
+    this.elements
+      .inputField("Enter Platform Service Fee Value")
+      .should("have.value", info.platformSeriveFeeValue);
+    this.elements
+      .radioField(
+        "Allow business to take cash payments",
+        info.allowBussinesToTakeCashPayment
+      )
+      .should("be.checked");
+    this.elements
+      .radioField(
+        "Allow business add Membership",
+        info.allowBusinessToAddMembership
+      )
+      .should("be.checked");
+    this.elements
+      .radioField(
+        "Allow business keep Membership Fees",
+        info.allowBusinessKeepMemberShipFees
+      )
+      .should("be.checked");
+    this.elements
+      .radioField("Include Subscription", info.includeSubscription)
+      .should("be.checked");
+    this.elements
+      .radioField("Pay Subscription to", info.paySubscriptionTo)
+      .should("be.checked");
+    this.elements
+      .radioField("Allow Service Consultations?", info.allowServiceConsultation)
+      .should("be.checked");
+    this.elements
+      .radioField(
+        "Allow In Session Consultations?",
+        info.allowInServiceConsultation
+      )
+      .should("be.checked");
+    this.elements
+      .inputField("Minimum Price ($)")
+      .should("have.value", info.travelMinPrice);
+    this.elements
+      .inputField("Price Per Mile ($)")
+      .should("have.value", info.travelPricePerMile);
+    this.elements
+      .noPaneltyUpTo()
+      .first()
+      .should("have.value", info.noPaneltyUpTo1);
+    this.elements
+      .bookingChanges()
+      .first()
+      .should("have.value", info.bookingChanges1);
+    this.elements
+      .noPaneltyUpTo()
+      .last()
+      .should("have.value", info.noPaneltyUpTo2);
+    this.elements
+      .bookingChanges()
+      .last()
+      .should("have.value", info.bookingChanges2);
+  }
+
+  addMobileBookingCommision(info) {
+    this.elements.mobileBookingCommision().click();
+    this.elements.businessCommissionType().select(info.businessCommissionType);
     this.elements
       .businessCommissionPercentage()
       .clear()
-      .type(businessDetails.businessCommissionPercentage);
+      .type(info.businessCommissionPercentage);
     this.elements
       .whitelabelCommissionType()
-      .select(businessDetails.whitelabelCommissionType);
+      .select(info.whitelabelCommissionType);
     this.elements
       .whitelabelCommissionPercentage()
       .clear()
-      .type(businessDetails.whitelabelCommissionPercentage);
+      .type(info.whitelabelCommissionPercentage);
     this.elements
       .telemedicineCommissionType()
-      .select(businessDetails.telemedicineCommissionType);
+      .select(info.telemedicineCommissionType);
     this.elements
       .telemedicineCommissionPercentage()
       .clear()
-      .type(businessDetails.telemedicineCommissionPercentage);
+      .type(info.telemedicineCommissionPercentage);
     this.elements.mobileBookingCommisionSave().click({ force: true });
     cy.wait(7000);
   }
