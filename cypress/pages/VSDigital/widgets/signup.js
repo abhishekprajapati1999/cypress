@@ -1,34 +1,34 @@
 import HomePage from "./homePage";
+import * as locators from "../../../locators/VSDigital/widgets/signup.json";
+
 const home = new HomePage();
 
 class SignUp {
   elements = {
+    ...locators,
     signUpVisitBtn: () =>
-      cy.get("button.nav-btn.nav-btn.btn-primary").contains("Sign up"),
-    prefix: () => cy.get("select[name='prefix']"),
-    firstName: () => cy.get("input[placeholder='First Name']"),
-    middleName: () => cy.get("input[placeholder='Middle Name']"),
-    lastName: () => cy.get("input[placeholder='Last Name']"),
-    enterSuffix: () => cy.get("input[placeholder='Enter Suffix']"),
-    email: () => cy.get("input[placeholder='Email']"),
-    DOB: () => cy.get("input[placeholder='Date of Birth']"),
-    gender: () => cy.get("select[name='gender']"),
-    phone: () => cy.get("input[placeholder='Phone']"),
-    heightInFeet: () => cy.get("input[placeholder='Height in Feet']"),
-    heightInInches: () => cy.get("input[placeholder='Height in Inches']"),
-    weight: () => cy.get("input[placeholder='Weight']"),
-    searchAddress: () => cy.get("input[placeholder='Search your address']"),
+      cy.get(this.elements.signUpVisitBtnLocator).contains("Sign up"),
+    prefix: () => cy.get(this.elements.prefixLocator),
+    firstName: () => cy.get(this.elements.firstNameLocator),
+    middleName: () => cy.get(this.elements.middleNameLocator),
+    lastName: () => cy.get(this.elements.lastNameLocator),
+    enterSuffix: () => cy.get(this.elements.enterSuffixLocator),
+    email: () => cy.get(this.elements.emailLocator),
+    DOB: () => cy.get(this.elements.DOBLocator),
+    gender: () => cy.get(this.elements.genderLocator),
+    phone: () => cy.get(this.elements.phoneLocator),
+    heightInFeet: () => cy.get(this.elements.heightInFeetLocator),
+    heightInInches: () => cy.get(this.elements.heightInInchesLocator),
+    weight: () => cy.get(this.elements.weightLocator),
+    searchAddress: () => cy.get(this.elements.searchAddressLocator),
     searchedAddressSelect: () =>
-      cy.get(".list-group-item.list-group-item-action"),
-    addressLine2: () =>
-      cy.get(
-        "input[placeholder='Apt, suite, unit, building, floor, etc. (optional)']"
-      ),
-    landmark: () => cy.get("input[placeholder='Enter Landmark (optional)']"),
-    zipCode: () => cy.get("input[placeholder='Zip/Postal Code']"),
-    password: () => cy.get("input[placeholder='Password']"),
-    confirmPassword: () => cy.get("input[placeholder='Confirm Password']"),
-    clickSignUp: () => cy.get("button[class='btn cm-btn-color form-control']"),
+      cy.get(this.elements.searchedAddressSelectLocator),
+    addressLine2: () => cy.get(this.elements.addressLine2Locator),
+    landmark: () => cy.get(this.elements.landmarkLocator),
+    zipCode: () => cy.get(this.elements.zipCodeLocator),
+    password: () => cy.get(this.elements.passwordLocator),
+    confirmPassword: () => cy.get(this.elements.confirmPasswordLocator),
+    clickSignUp: () => cy.get(this.elements.clickSignUpLocator),
   };
 
   visit() {

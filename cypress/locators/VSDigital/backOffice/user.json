@@ -1,0 +1,6 @@
+{
+  "saveLinkLocator": ".btn-primary",
+  "selectFieldLocator": ".form-group",
+  "radioFieldLocator": ".form-group",
+  "inputFieldLocator": ".form-group"
+}

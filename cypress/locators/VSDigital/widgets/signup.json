@@ -1,0 +1,23 @@
+{
+  "signUpVisitBtnLocator": "button.nav-btn.nav-btn.btn-primary",
+  "prefixLocator": "select[name='prefix']",
+  "firstNameLocator": "input[placeholder='First Name']",
+  "middleNameLocator": "input[placeholder='Middle Name']",
+  "lastNameLocator": "input[placeholder='Last Name']",
+  "enterSuffixLocator": "input[placeholder='Enter Suffix']",
+  "emailLocator": "input[placeholder='Email']",
+  "DOBLocator": "input[placeholder='Date of Birth']",
+  "genderLocator": "select[name='gender']",
+  "phoneLocator": "input[placeholder='Phone']",
+  "heightInFeetLocator": "input[placeholder='Height in Feet']",
+  "heightInInchesLocator": "input[placeholder='Height in Inches']",
+  "weightLocator": "input[placeholder='Weight']",
+  "searchAddressLocator": "input[placeholder='Search your address']",
+  "searchedAddressSelectLocator": ".list-group-item.list-group-item-action",
+  "addressLine2Locator": "input[placeholder='Apt, suite, unit, building, floor, etc. (optional)']",
+  "landmarkLocator": "input[placeholder='Enter Landmark (optional)']",
+  "zipCodeLocator": "input[placeholder='Zip/Postal Code']",
+  "passwordLocator": "input[placeholder='Password']",
+  "confirmPasswordLocator": "input[placeholder='Confirm Password']",
+  "clickSignUpLocator": "button[class='btn cm-btn-color form-control']"
+}

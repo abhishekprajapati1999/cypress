@@ -1,0 +1,14 @@
+{
+  "selectFieldLocator": ".form-group",
+  "multiSelectFieldLocator": "label",
+  "radioFieldLocator": ".form-group",
+  "inlineRadioFieldLocator": ".form-group",
+  "inputFieldLocator": ".form-group",
+  "saveBtnLocator": ".col-md-12 > .btn-primary",
+  "drivingLicenseUploadLocator": "input[id='serviceProvider.drivingLicenseImageOriginalFileName']",
+  "submitBtnLocator": "button[class='btn btn-success']",
+  "licenseUploadLocator": "input[id='serviceProvider.licenseUpload']",
+  "stateLocator": "option",
+  "widgetLinkLocator": "a[href*=\"vsdigital-bookingwidget-test\"]",
+  "prefixLocator": "select[name='serviceProvider.prefix']"
+}

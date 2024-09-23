@@ -19,16 +19,16 @@ describe("Auth Test Cases", () => {
       `${Cypress.env("BACKOFFICE_LOGIN_LINK")}/vsdigitaltest.onmicrosoft.com/B2C_1_SignUp_SignIn_Widget/SelfAsserted`
     ).as("getUser");
     homePage.visit();
-    const { emailTxt, passwordTxt, loginBtn, errorTxt } = auth.elements;
+    const { emailTxtLocator, passwordTxtLocator, loginBtnLocator, errorTxtLocator } = auth.elements;
 
     cy.origin(
       Cypress.env("BACKOFFICE_LOGIN_LINK"),
-      { args: { emailTxt, passwordTxt, loginBtn, errorTxt } },
-      ({ emailTxt, passwordTxt, loginBtn, errorTxt }) => {
-        cy.get(emailTxt).clear().type("te1234@gmail.com");
-        cy.get(passwordTxt).clear().type("test123");
-        cy.get(loginBtn).click();
-        cy.get(errorTxt)
+      { args: { emailTxtLocator, passwordTxtLocator, loginBtnLocator, errorTxtLocator } },
+      ({ emailTxtLocator, passwordTxtLocator, loginBtnLocator, errorTxtLocator }) => {
+        cy.get(emailTxtLocator).clear().type("te1234@gmail.com");
+        cy.get(passwordTxtLocator).clear().type("test123");
+        cy.get(loginBtnLocator).click();
+        cy.get(errorTxtLocator)
           .find("p")
           .should("have.text", "We can't seem to find your account");
       }

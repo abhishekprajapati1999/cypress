@@ -1,24 +1,32 @@
+import * as locators from "../../../locators/VSDigital/backOffice/user.json";
 class UserPage {
   elements = {
-    addUserLink:
-      "https://vsdigital-backoffice-test.azurewebsites.net/users/new",
-    saveLink: () => cy.get(".btn-primary"),
+    ...locators,
+    saveLink: () => cy.get(this.elements.saveLinkLocator),
     selectField: (field) =>
-      cy.get(".form-group").contains("label", field).parent().find("select"),
+      cy
+        .get(this.elements.selectFieldLocator)
+        .contains("label", field)
+        .parent()
+        .find("select"),
     radioField: (field, value) =>
       cy
-        .get(".form-group")
+        .get(this.elements.radioFieldLocator)
         .contains("label", field)
         .parent()
         .contains("label", value)
         .parent()
         .find("input"),
     inputField: (field) =>
-      cy.get(".form-group").contains("label", field).parent().find("input"),
+      cy
+        .get(this.elements.inputFieldLocator)
+        .contains("label", field)
+        .parent()
+        .find("input"),
   };
 
   visitAdd() {
-    cy.visit(this.elements.addUserLink);
+    cy.visit(`${Cypress.env("BACKOFFICE_LINK")}/users/new`);
   }
 
   visitEdit(id) {
@@ -26,7 +34,7 @@ class UserPage {
   }
 
   addUser(userInfo) {
-    cy.wait(5000)
+    cy.wait(5000);
     this.elements.inputField("First Name").clear().type(userInfo.firstName);
     this.elements.inputField("Last Name").clear().type(userInfo.lastName);
     this.elements.inputField("Email").clear().type(userInfo.email);
@@ -48,7 +56,7 @@ class UserPage {
   }
 
   validateUser(userInfo) {
-    cy.wait(5000)
+    cy.wait(5000);
     this.elements
       .inputField("First Name")
       .should("have.value", userInfo.firstName);

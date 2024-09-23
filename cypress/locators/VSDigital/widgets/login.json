@@ -1,0 +1,7 @@
+{
+  "logInVisitBtnLocator": "button.nav-btn.btn-clear",
+  "logoutBtnLocator": "button.nav-btn.btn-clear",
+  "loginEmailLocator": "#email",
+  "loginPasswordLocator": "#password",
+  "loginBtnLocator": "#next"
+}

@@ -1,60 +1,70 @@
-import HomePage from "./homePage";
-const home = new HomePage();
+import * as locators from "../../../locators/VSDigital/backOffice/business.json";
 
 class BusinessPage {
   elements = {
-    businessMenu: () => cy.contains("span.menu-text", "Business"),
-    businessSubMenu: () => cy.get("a[href='/business']"),
-    businessActionBtn: () =>
-      cy.get("button.btn.btn-primary.btn-sm.ml-1.undefined.cursor-pointer"),
-    businessProfileImage: () => cy.get("input[name='businessProfileImage']"),
-    businessBannerImage: () => cy.get("input[name='businessBannerImage']"),
-    businessListingImage: () => cy.get("input[name='businessListingImage']"),
-    bookingTypeCallout: () => cy.get("#calloutBookingType"),
-    bookingTypeFacility: () => cy.get("#faciltyBookingType"),
+    ...locators,
+    businessMenu: () =>
+      cy.contains(this.elements.businessMenuLocator, "Business"),
+    businessSubMenu: () => cy.get(this.elements.businessSubMenuLocator),
+    businessActionBtn: () => cy.get(this.elements.businessActionBtnLocator),
+    businessProfileImage: () =>
+      cy.get(this.elements.businessProfileImageLocator),
+    businessBannerImage: () => cy.get(this.elements.businessBannerImageLocator),
+    businessListingImage: () =>
+      cy.get(this.elements.businessListingImageLocator),
+    bookingTypeCallout: () => cy.get(this.elements.bookingTypeCalloutLocator),
+    bookingTypeFacility: () => cy.get(this.elements.bookingTypeFacilityLocator),
     selectField: (field) =>
-      cy.get(".form-group").contains("label", field).parent().find("select"),
+      cy
+        .get(this.elements.selectFieldLocator)
+        .contains("label", field)
+        .parent()
+        .find("select"),
     radioField: (field, value) =>
       cy
-        .get(".form-group")
+        .get(this.elements.radioFieldLocator)
         .contains("label", field)
         .parent()
         .contains("label", value)
         .parent()
         .find("input"),
     inputField: (field) =>
-      cy.get(".form-group").contains("label", field).parent().find("input"),
+      cy
+        .get(this.elements.inputFieldLocator)
+        .contains("label", field)
+        .parent()
+        .find("input"),
     textAreaField: (field) =>
-      cy.get(".form-group").contains("label", field).parent().find("textarea"),
-    noPaneltyUpTo: () =>
-      cy.get("input[placeholder='Enter no penalty up to (hrs)']"),
-    bookingChanges: () =>
-      cy.get("input[placeholder='Enter % of booking charged']"),
-    photoUpdateSubmitBtn: () => cy.get("button[class='btn btn-success']"),
-    saveBtn: () => cy.contains("button[type='button']", "Save"),
-    cancelBtn: () => cy.contains("button[type='button']", "Cancel"),
-    continueBtn: () =>
-      cy.get("div[class='modal-footer'] div button[type='button']"),
+      cy
+        .get(this.elements.textAreaFieldLocator)
+        .contains("label", field)
+        .parent()
+        .find("textarea"),
+    noPaneltyUpTo: () => cy.get(this.elements.noPaneltyUpToLocator),
+    bookingChanges: () => cy.get(this.elements.bookingChangesLocator),
+    photoUpdateSubmitBtn: () =>
+      cy.get(this.elements.photoUpdateSubmitBtnLocator),
+    saveBtn: () => cy.contains(this.elements.saveBtnLocator, "Save"),
+    cancelBtn: () => cy.contains(this.elements.cancelBtnLocator, "Cancel"),
+    continueBtn: () => cy.get(this.elements.continueBtnLocator),
     // mobile commision
     mobileBookingCommision: () =>
-      cy.get("#uncontrolled-tab-example-tab-mobileBookingCommission"),
+      cy.get(this.elements.mobileBookingCommisionLocator),
     businessCommissionType: () =>
-      cy.get("select[name='commission.Callout.businessCommissionBasedOn']"),
+      cy.get(this.elements.businessCommissionTypeLocator),
     businessCommissionPercentage: () =>
-      cy.get("input[placeholder='Enter Business Commission']"),
+      cy.get(this.elements.businessCommissionPercentageLocator),
     whitelabelCommissionType: () =>
-      cy.get("select[name='commission.Callout.whitelabelCommissionBasedOn']"),
+      cy.get(this.elements.whitelabelCommissionTypeLocator),
     whitelabelCommissionPercentage: () =>
-      cy.get("input[placeholder='Enter Whitelabel Commission']"),
+      cy.get(this.elements.whitelabelCommissionPercentageLocator),
     telemedicineCommissionType: () =>
-      cy.get("select[name='commission.Callout.telemedicineCommissionBasedOn']"),
+      cy.get(this.elements.telemedicineCommissionTypeLocator),
     telemedicineCommissionPercentage: () =>
-      cy.get("input[placeholder='Enter Telemedicine Commission']"),
+      cy.get(this.elements.telemedicineCommissionPercentageLocator),
     mobileBookingCommisionSave: () =>
-      cy.get(
-        "#uncontrolled-tab-example-tabpane-mobileBookingCommission > .col-md-12 > .btn-primary"
-      ),
-    widgetLink: () => cy.get('a[href*="vsdigital-bookingwidget-test"]'),
+      cy.get(this.elements.mobileBookingCommisionSaveLocator),
+    widgetLink: () => cy.get(this.elements.widgetLinkLocator),
   };
 
   visit() {

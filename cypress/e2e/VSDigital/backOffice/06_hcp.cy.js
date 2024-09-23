@@ -1,43 +1,44 @@
 import { faker } from "@faker-js/faker";
 import Auth from "../../../pages/VSDigital/backOffice/auth";
 import HomePage from "../../../pages/VSDigital/backOffice/homePage";
-import ServiceProviderPage from "../../../pages/VSDigital/backOffice/serviceProvider";
-import generateServiceProviderDetails from "../../../utils/factories/backOffice/serviceProvider";
+import HCPPage from "../../../pages/VSDigital/backOffice/hcp";
+import generateHCPDetails from "../../../utils/factories/backOffice/hcp";
 
 const auth = new Auth();
 const homePage = new HomePage();
-const serviceProvider = new ServiceProviderPage();
+const hcp = new HCPPage();
 
-describe("Service Provider Test Cases", () => {
+describe("HDP Test Cases", () => {
   let cred;
-  let serviceProviderDetails;
+  let hcpDetails;
 
   before(() => {
     cy.fixture("VSDigital/backOffice/loginCreds").then((data) => {
       cred = data;
     });
     cy.fixture("VSDigital/backOffice/businessDetails").then((data) => {
-      serviceProviderDetails = generateServiceProviderDetails({
+      hcpDetails = generateHCPDetails({
         businessName: data.businessName,
       });
+      cy.log(hcpDetails)
     });
   });
 
-  it("should be able to create a service provider successfully", () => {
+  it("should be able to create a HCP successfully", () => {
     cy.intercept("POST", "/api/v1/ServiceProvider/AddServiceProvider").as(
       "addServiceProvider"
     );
     cy.intercept("POST", "/api/v1/ServiceProvider/GetServiceProviderList").as(
       "getServiceProvider"
     );
-    homePage.visit();
+    homePage.visit(); 
     auth.login(cred);
     auth.elements.usernameTxt().contains(cred.expected);
 
     // Navigate to add service provider page
-    serviceProvider.visit();
+    hcp.visit();
     cy.wait(7000);
-    serviceProvider.addServiceProvider(serviceProviderDetails);
+    hcp.addHCP(hcpDetails);
     cy.wait(2000);
 
     cy.wait("@addServiceProvider").then((interception) => {
@@ -46,8 +47,8 @@ describe("Service Provider Test Cases", () => {
       expect(responseBody).to.have.property("status", "Success");
       expect(responseBody).to.have.property("data");
       cy.writeFile(
-        "cypress/fixtures/VSDigital/backOffice/serviceProviderDetails.json",
-        serviceProviderDetails
+        "cypress/fixtures/VSDigital/backOffice/hcpDetails.json",
+        hcpDetails
       );
     });
 
@@ -58,46 +59,20 @@ describe("Service Provider Test Cases", () => {
       expect(responseBody).to.have.property("data");
       expect(responseBody.data).to.have.property("entities");
       expect(responseBody.data.entities[0].username).contains(
-        serviceProviderDetails.firstName
+        hcpDetails.firstName
       );
       cy.writeFile(
-        "cypress/fixtures/VSDigital/backOffice/serviceProviderDetails.json",
+        "cypress/fixtures/VSDigital/backOffice/hcpDetails.json",
         {
           serviceProviderId: responseBody.data.entities[0].serviceProviderId,
-          ...serviceProviderDetails,
+          ...hcpDetails,
         }
       );
     });
   });
 
-  it("should be able to find the widget link for the service provider", () => {
-    cy.fixture("VSDigital/backOffice/serviceProviderDetails.json").then(
-      (data) => {
-        homePage.visit();
-        auth.login(cred);
-        auth.elements.usernameTxt().contains(cred.expected);
-        // Get Widget Link
-        serviceProvider.editVisit(data.serviceProviderId);
-        cy.wait(2000);
-        serviceProvider.elements
-          .widgetLink()
-          .invoke("attr", "href")
-          .then((href) => {
-            // Save info
-            cy.writeFile(
-              "cypress/fixtures/VSDigital/backOffice/serviceProviderDetails.json",
-              {
-                ...data,
-                widgetLink: href,
-              }
-            );
-          });
-      }
-    );
-  });
-
-  it("should be able to edit phone number in a service provider", () => {
-    cy.fixture("VSDigital/backOffice/serviceProviderDetails.json").then(
+  it("should be able to edit phone number in a HCP", () => {
+    cy.fixture("VSDigital/backOffice/hcpDetails.json").then(
       (data) => {
         cy.intercept(
           "POST",
@@ -108,18 +83,18 @@ describe("Service Provider Test Cases", () => {
         auth.elements.usernameTxt().contains(cred.expected);
 
         // Navigate to Business page
-        serviceProvider.editVisit(data.serviceProviderId);
-        cy.wait(7000);
+        hcp.editVisit(data.serviceProviderId);
+        cy.wait(5000);
         const newData = {
           phone: faker.string.numeric(10),
         };
-        serviceProvider.elements
+        hcp.elements
           .inputField("Phone")
           .clear()
           .type(newData.phone);
         cy.wait(2000);
 
-        serviceProvider.elements.editSaveBtn().click();
+        hcp.elements.saveBtn().click();
 
         cy.wait("@updateServiceProvider").then((interception) => {
           expect(interception.response.statusCode).to.eq(200);
@@ -127,7 +102,7 @@ describe("Service Provider Test Cases", () => {
           expect(responseBody).to.have.property("status", "Success");
           expect(responseBody).to.have.property("data");
           cy.writeFile(
-            "cypress/fixtures/VSDigital/backOffice/serviceProviderDetails.json",
+            "cypress/fixtures/VSDigital/backOffice/hcpDetails.json",
             {
               ...data,
               ...newData,
@@ -138,16 +113,16 @@ describe("Service Provider Test Cases", () => {
     );
   });
 
-  it("should be able to validate the service provider info", () => {
-    cy.fixture("VSDigital/backOffice/serviceProviderDetails").then((data) => {
+  it("should be able to validate the HCP info", () => {
+    cy.fixture("VSDigital/backOffice/hcpDetails").then((data) => {
       homePage.visit();
       auth.login(cred);
       auth.elements.usernameTxt().contains(cred.expected);
 
       // Navigate to Business page
-      serviceProvider.editVisit(data.serviceProviderId);
+      hcp.editVisit(data.serviceProviderId);
       cy.wait(7000);
-      serviceProvider.validateServiceProvider(data);
+      hcp.validateHCP(data);
     });
   });
 });

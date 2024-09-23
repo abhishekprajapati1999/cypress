@@ -1,17 +1,28 @@
+import * as locators from "../../../locators/VSDigital/widgets/profile.json";
+
 class Profile {
   elements = {
-    profileTab: () => cy.get("nav ul li").contains("Profile"),
+    ...locators,
+    profileTab: () =>
+      cy.get(this.elements.profileTabLocator).contains("Profile"),
     profileData: (labelText) =>
-      cy.contains("label", labelText).parent().find("input.form-control"),
-    profileLocation: () => cy.get("#location"),
-    editBtn: () => cy.get("button[class='btn cm-btn-color undefined']"),
+      cy
+        .contains(this.elements.profileDataLocator, labelText)
+        .parent()
+        .find("input.form-control"),
+    profileLocation: () => cy.get(this.elements.profileLocationLocator),
+    editBtn: () => cy.get(this.elements.editBtnLocator),
     profileEdit: (labelText) =>
-        cy.contains("label", labelText).parent().find(".form-control"),
-    profileUpdateBtn: () => cy.get("button[type='submit']"),
-    photoInputFile: () => cy.get('input[type="file"]'),
-    photoUpdateBtn: () => cy.get(".btn.btn-primary.btn-sm.undefined"),
-    photoUpdateSubmitBtn: () => cy.get("button[class='btn cm-btn-color btn btn-primary']"),
-    cancelUpdateBtn: () => cy.get("button[class='btn cm-btn-tertiary']")
+      cy
+        .contains(this.elements.profileEditLocator, labelText)
+        .parent()
+        .find(".form-control"),
+    profileUpdateBtn: () => cy.get(this.elements.profileUpdateBtnLocator),
+    photoInputFile: () => cy.get(this.elements.photoInputFileLocator),
+    photoUpdateBtn: () => cy.get(this.elements.photoUpdateBtnLocator),
+    photoUpdateSubmitBtn: () =>
+      cy.get(this.elements.photoUpdateSubmitBtnLocator),
+    cancelUpdateBtn: () => cy.get(this.elements.cancelUpdateBtnLocator),
   };
 
   visit() {
@@ -19,6 +30,7 @@ class Profile {
   }
 
   validateDetails(info) {
+    cy.wait(5000);
     this.elements.profileData("Prefix").should("have.value", info.prefix);
     this.elements
       .profileData("First Name")
