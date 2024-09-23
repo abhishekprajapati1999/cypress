@@ -185,6 +185,7 @@ class HCPPage {
       .should("have.value", info.addressLine2);
     this.elements
       .selectField("Country")
+      .wait(1000)
       .find("option:selected")
       .should("contain.text", info.country);
     this.elements.inputField("City").should("have.value", info.city);
