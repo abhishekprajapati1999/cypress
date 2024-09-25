@@ -3,7 +3,7 @@
   "multiSelectFieldLocator": "label",
   "radioFieldLocator": ".form-group",
   "inputFieldLocator": ".form-group",
-  "saveBtnLocator": "button[type='button']",
+  "saveBtnLocator": ".col-md-12 > .btn-primary",
   "editSaveBtnLocator": ".col-md-12 > .btn-primary",
   "drivingLicenseUploadLocator": "input[id='serviceProvider.drivingLicenseImageOriginalFileName']",
   "submitBtnLocator": "button[class='btn btn-success']",

@@ -1,0 +1,13 @@
+{
+  "selectFieldLocator": ".form-group",
+  "multiSelectFieldLocator": "label",
+  "radioFieldLocator": ".form-group",
+  "inputFieldLocator": ".form-group",
+  "saveBtnLocator": ".col-md-12 > .btn-primary",
+  "editSaveBtnLocator": ".col-md-12 > .btn-primary",
+  "selectServiceCategoryLocator": "input[placeholder='Select Service Category']",
+  "checkAllLocator": "#all",
+  "continueBtnLocator": "button.btn.btn-primary",
+  "inlineRadioFieldLocator": ".form-row",
+  "editorFieldLocator": "div[contenteditable='true']"
+}

@@ -1,0 +1,10 @@
+{
+  "selectFieldLocator": "h5.m-4",
+  "radioFieldLocator": "h5.m-4",
+  "inputFieldLocator": "h5.m-4",
+  "editorFieldLocator": "div[contenteditable='true']",
+  "questionLocator": "h5.m-4",
+  "addQuestionBtnLocator": "button[class='btn btn-primary btn-sm ml-1 btn-md cursor-pointer']",
+  "questionListLocator": ".py-3.accordion",
+  "saveBtnLocator": ".col-md-12 > .btn-primary"
+}

@@ -1,0 +1,90 @@
+import { faker } from "@faker-js/faker";
+
+function generateServiceDetails(info) {
+  return {
+    type: info.type || faker.helpers.arrayElement(["Service"]),
+    serviceName: "Service_" + faker.person.firstName(),
+    serviceInternalName: "Service_" + faker.person.middleName(),
+    status: "Active",
+    serviceDuration: faker.number.int({ min: 10, max: 60 }),
+    additionalTimePerPersion: faker.number.int({ min: 10, max: 50 }),
+    travelBufferTime: faker.number.int({ min: 10, max: 50 }),
+    serviceCategory: "13 service categories",
+    business: info.businessName,
+    tagline: faker.word.words(4),
+    listingTagline: faker.word.words(1),
+    serviceIngredients: faker.word.words(1),
+    serviceListingDescription: faker.word.words(10),
+    benefits: faker.word.words(10),
+    doesthisServiceRequiresHCPConsultation: "Yes",
+    howLongIsTheConsultationValidForValue: faker.number.int({
+      min: 1,
+      max: 12,
+    }),
+    howLongIsTheConsultationValidForUnit: faker.helpers.arrayElement([
+      "Weeks",
+      "Months",
+      "Years",
+    ]),
+    consultationCommissionLevel: faker.helpers.arrayElement([
+      "Level 1",
+      "Level 2",
+      "Level 3",
+    ]),
+    consultationMargin: faker.number.int({ min: 10, max: 50 }),
+    setServiceAsPatientSpecific: "Yes",
+    category: faker.helpers.arrayElement([
+      "Chemical Peels",
+      "Fibroblast",
+      "Hormone Therapy",
+      "IM",
+    ]),
+    shippingAddress: faker.helpers.arrayElement(["Patient", "Business"]),
+    typeOfHCPConsultant: info.typeOfHCPConsultant || "Async",
+    preAssessmentRequired: "Yes",
+    frequencyValue: faker.number.int({ min: 10, max: 20 }),
+    frequencyUnit: faker.helpers.arrayElement([
+      "Days",
+      "Weeks",
+      "Months",
+      "Years",
+    ]),
+
+    preAssessment: info.preAssessment || "Test",
+    isReAssessmentRequired: "No",
+    reAssessmentFrequency: faker.number.int({ min: 10, max: 50 }),
+    needDoctorApproval: faker.helpers.arrayElement(["Yes", "No"]),
+    reAssessment: info.preAssessment || "Test",
+    labsRequired: "Yes",
+    labSource: "WWL",
+    CSPCommision: faker.number.int({ min: 10, max: 50 }),
+    medicationRequired: "Yes",
+    ismedicationSelfAdministered: info.ismedicationSelfAdministered || "Yes",
+    medicationAutoRenew: info.medicationAutoRenew || "Disable",
+    checkInRequired: info.checkInRequired || "No",
+    priceOfVial: info.priceOfVial || faker.number.int({ min: 10, max: 50 }),
+    shippingCost: info.shippingCost || faker.number.int({ min: 10, max: 50 }),
+    programDurationValue:
+      info.programDuration || faker.number.int({ min: 1, max: 10 }),
+    programDurationUnit:
+      info.programDuration ||
+      faker.helpers.arrayElement(["Weeks", "Months", "Years"]),
+    dosageValue: info.dosage || faker.number.int({ min: 1, max: 10 }),
+    dosageUnit: info.dosage || "mg",
+    medicationSizeValue: faker.number.int({ min: 10, max: 50 }),
+    medicationSizeUnit: "mg",
+    medicationStrengthValue: faker.number.int({ min: 10, max: 50 }),
+    medicationStrengthUnit: "mg",
+    VSDigitalPackageCostToBusiness: faker.number.int({ min: 10, max: 50 }),
+    sellingPrice: faker.number.int({ min: 60, max: 100 }),
+    medicationExpiryValue: faker.number.int({ min: 60, max: 200 }),
+    medicationExpiryUnit: faker.helpers.arrayElement([
+      "Days",
+    ]),
+    patientSpecificInformationPage: faker.word.words(4),
+    defaultCommission: faker.number.int({ min: 60, max: 100 }),
+    commissionLevelSilver: faker.number.int({ min: 60, max: 100 }),
+    commissionLevelGold: faker.number.int({ min: 60, max: 100 }),
+  };
+}
+module.exports = generateServiceDetails;

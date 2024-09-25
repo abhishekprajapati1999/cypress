@@ -26,10 +26,10 @@ describe("HDP Test Cases", () => {
 
   it("should be able to create a HCP successfully", () => {
     cy.intercept("POST", "/api/v1/ServiceProvider/AddServiceProvider").as(
-      "addServiceProvider"
+      "addHCP"
     );
     cy.intercept("POST", "/api/v1/ServiceProvider/GetServiceProviderList").as(
-      "getServiceProvider"
+      "getHCP"
     );
     homePage.visit(); 
     auth.login(cred);
@@ -41,7 +41,7 @@ describe("HDP Test Cases", () => {
     hcp.addHCP(hcpDetails);
     cy.wait(2000);
 
-    cy.wait("@addServiceProvider").then((interception) => {
+    cy.wait("@addHCP").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
       const responseBody = interception.response.body;
       expect(responseBody).to.have.property("status", "Success");
@@ -52,7 +52,7 @@ describe("HDP Test Cases", () => {
       );
     });
 
-    cy.wait("@getServiceProvider").then((interception) => {
+    cy.wait("@getHCP").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
       const responseBody = interception.response.body;
       expect(responseBody).to.have.property("status", "Success");
@@ -77,7 +77,7 @@ describe("HDP Test Cases", () => {
         cy.intercept(
           "POST",
           "/api/v1/ServiceProvider/UpdateServiceProvider"
-        ).as("updateServiceProvider");
+        ).as("updateHCP");
         homePage.visit();
         auth.login(cred);
         auth.elements.usernameTxt().contains(cred.expected);
@@ -93,10 +93,11 @@ describe("HDP Test Cases", () => {
           .clear()
           .type(newData.phone);
         cy.wait(2000);
-
+        hcp.elements.saveBtn().should("be.visible")
         hcp.elements.saveBtn().click();
+        cy.wait(5000)
 
-        cy.wait("@updateServiceProvider").then((interception) => {
+        cy.wait("@updateHCP").then((interception) => {
           expect(interception.response.statusCode).to.eq(200);
           const responseBody = interception.response.body;
           expect(responseBody).to.have.property("status", "Success");

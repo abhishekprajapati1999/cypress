@@ -22,7 +22,9 @@ describe("Edit Business Test Cases", () => {
   });
 
   it("should be able to edit phone number in a business", () => {
-    cy.intercept("POST", "/api/v1/Business/UpdateBusiness").as("updateBusiness");
+    cy.intercept("POST", "/api/v1/Business/UpdateBusiness").as(
+      "updateBusiness"
+    );
     homePage.visit();
     auth.login(cred);
     auth.elements.usernameTxt().contains(cred.expected);
@@ -32,13 +34,14 @@ describe("Edit Business Test Cases", () => {
     cy.wait(5000);
     const newData = {
       phone: faker.string.numeric(10),
-      note: faker.word.words(5)
-    }
+      note: faker.word.words(5),
+    };
     businessPage.elements.inputField("Phone").clear().type(newData.phone);
     businessPage.elements.inputField("Note").clear().type(newData.note);
     cy.wait(2000);
 
-    businessPage.elements.saveBtn().click();  
+    businessPage.elements.saveBtn().click();
+    cy.wait(5000);
 
     cy.wait("@updateBusiness").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);
@@ -49,7 +52,7 @@ describe("Edit Business Test Cases", () => {
         "cypress/fixtures/VSDigital/backOffice/businessDetails.json",
         {
           ...businessDetails,
-          ...newData
+          ...newData,
         }
       );
     });

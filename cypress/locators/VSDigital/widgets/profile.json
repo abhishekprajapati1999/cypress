@@ -1,0 +1,12 @@
+{
+  "profileTabLocator": "nav ul li",
+  "profileDataLocator": "label",
+  "profileLocationLocator": "#location",
+  "editBtnLocator": "button[class='btn cm-btn-color undefined']",
+  "profileEditLocator": "label",
+  "profileUpdateBtnLocator": "button[type='submit']",
+  "photoInputFileLocator": "input[type=\"file\"]",
+  "photoUpdateBtnLocator": ".btn.btn-primary.btn-sm.undefined",
+  "photoUpdateSubmitBtnLocator": "button[class='btn cm-btn-color btn btn-primary']",
+  "cancelUpdateBtnLocator": "button[class='btn cm-btn-tertiary']"
+}

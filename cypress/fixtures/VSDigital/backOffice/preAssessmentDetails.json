@@ -1,0 +1,30 @@
+{
+  "servicePreAssessmentDetailsId": 30,
+  "name": "Susie",
+  "status": "Active",
+  "BMICalculator": "Yes",
+  "minimumPassingScore": 35,
+  "minimumBMI": 43,
+  "questionsAndAnswers": [
+    {
+      "question": "Denuo bos timor coerceo aranea.",
+      "answer": "Text"
+    },
+    {
+      "question": "Celebrer umquam aranea adversus ademptio cedo timor.",
+      "answer": "Either"
+    },
+    {
+      "question": "Concedo excepturi nesciunt.",
+      "answer": "Either"
+    },
+    {
+      "question": "Clam conqueror adipisci comis amissio.",
+      "answer": "Text"
+    },
+    {
+      "question": "Carmen candidus nesciunt arcus versus civis.",
+      "answer": "Text"
+    }
+  ]
+}
