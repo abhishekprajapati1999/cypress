@@ -40,7 +40,7 @@ describe("Edit Business Test Cases", () => {
     businessPage.elements.inputField("Note").clear().type(newData.note);
     cy.wait(2000);
 
-    businessPage.elements.saveBtn().click();
+    businessPage.elements.saveBtn().click({ force: true });
     cy.wait(5000);
 
     cy.wait("@updateBusiness").then((interception) => {

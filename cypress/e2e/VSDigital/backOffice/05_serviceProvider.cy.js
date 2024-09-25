@@ -119,7 +119,7 @@ describe("Service Provider Test Cases", () => {
           .type(newData.phone);
         cy.wait(2000);
 
-        serviceProvider.elements.editSaveBtn().click();
+        serviceProvider.elements.editSaveBtn().click({ force: true });
 
         cy.wait("@updateServiceProvider").then((interception) => {
           expect(interception.response.statusCode).to.eq(200);

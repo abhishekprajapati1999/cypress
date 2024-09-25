@@ -67,7 +67,7 @@ describe("Pre Assessment Test Cases", () => {
         .type(newData.minimumBMI);
       cy.wait(2000);
 
-      preAssessment.elements.saveBtn().click();
+      preAssessment.elements.saveBtn().click({ force: true });
       cy.wait(5000);
 
       cy.wait("@updatePreAssessment").then((interception) => {

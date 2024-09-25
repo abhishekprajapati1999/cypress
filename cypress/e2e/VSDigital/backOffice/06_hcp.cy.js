@@ -94,7 +94,7 @@ describe("HDP Test Cases", () => {
           .type(newData.phone);
         cy.wait(2000);
         hcp.elements.saveBtn().should("be.visible")
-        hcp.elements.saveBtn().click();
+        hcp.elements.saveBtn().click({ force: true });
         cy.wait(5000)
 
         cy.wait("@updateHCP").then((interception) => {

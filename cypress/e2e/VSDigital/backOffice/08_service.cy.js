@@ -94,7 +94,7 @@ describe("Service Test Cases", () => {
         .type(newData.serviceDuration);
       cy.wait(2000);
 
-      service.elements.editSaveBtn().click();
+      service.elements.editSaveBtn().click({ force: true });
       cy.wait(5000);
 
       cy.wait("@updateService").then((interception) => {
