@@ -53,6 +53,7 @@ class UserPage {
     this.elements.inputField("City").clear().type(userInfo.city);
     this.elements.inputField("Zip Code").clear().type(userInfo.zip);
     this.elements.saveLink().click();
+    cy.wait(10000)
   }
 
   validateUser(userInfo) {

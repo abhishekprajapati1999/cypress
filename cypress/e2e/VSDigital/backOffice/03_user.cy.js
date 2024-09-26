@@ -60,6 +60,7 @@ describe("User Test Cases", () => {
     const newPhone = faker.string.numeric(10);
     userPage.elements.inputField("Phone").clear().type(newPhone);
     userPage.elements.saveLink().click({ force: true });
+    cy.wait(10000)
 
     cy.wait("@updateUser").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);

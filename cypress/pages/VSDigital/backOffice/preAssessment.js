@@ -39,6 +39,7 @@ class PreAssessmentPage {
         .find(this.elements.editorFieldLocator),
     addQuestionBtn: () => cy.get(this.elements.addQuestionBtnLocator),
     saveBtn: () => cy.contains(this.elements.saveBtnLocator, "Save"),
+    editBtn: () => cy.contains(this.elements.editBtnLocator, "Save"),
   };
 
   visit() {

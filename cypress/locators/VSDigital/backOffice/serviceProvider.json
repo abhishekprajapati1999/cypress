@@ -4,7 +4,7 @@
   "radioFieldLocator": ".form-group",
   "inputFieldLocator": ".form-group",
   "saveBtnLocator": ".col-md-12 > .btn-primary",
-  "editSaveBtnLocator": ".col-md-12 > .btn-primary",
+  "editSaveBtnLocator": "button.btn.btn-primary.btn-sm.ml-2.cursor-pointer",
   "drivingLicenseUploadLocator": "input[id='serviceProvider.drivingLicenseImageOriginalFileName']",
   "submitBtnLocator": "button[class='btn btn-success']",
   "licenseUploadLocator": "input[id='serviceProvider.licenseUpload']",

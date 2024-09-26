@@ -42,7 +42,7 @@ class HCPPage {
         .contains("label", field)
         .parent()
         .find("input"),
-    saveBtn: () => cy.get(this.elements.saveBtnLocator),
+    saveBtn: () => cy.get(this.elements.editBtnLocator),
     drivingLicenseUpload: () =>
       cy.get(this.elements.drivingLicenseUploadLocator),
     submitBtn: () => cy.get(this.elements.submitBtnLocator),

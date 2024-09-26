@@ -95,7 +95,7 @@ describe("Service Test Cases", () => {
       cy.wait(2000);
 
       service.elements.editSaveBtn().click({ force: true });
-      cy.wait(5000);
+      cy.wait(10000);
 
       cy.wait("@updateService").then((interception) => {
         expect(interception.response.statusCode).to.eq(200);

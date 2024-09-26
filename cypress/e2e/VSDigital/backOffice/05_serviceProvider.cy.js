@@ -120,6 +120,7 @@ describe("Service Provider Test Cases", () => {
         cy.wait(2000);
 
         serviceProvider.elements.editSaveBtn().click({ force: true });
+        cy.wait(10000);
 
         cy.wait("@updateServiceProvider").then((interception) => {
           expect(interception.response.statusCode).to.eq(200);
