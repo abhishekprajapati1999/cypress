@@ -149,7 +149,7 @@ class ServicePage {
       .radioField("Type of HCP consultation", info.typeOfHCPConsultant)
       .check();
     cy.wait(2000);
-    cy.get("#preAssessmentRequired").first().check().check();
+    cy.get("#preAssessmentRequired").first().check().check({force: true});
     cy.wait(5000);
     this.elements.inputField("Frequency").clear().type(info.frequencyValue);
     this.elements.selectField("Frequency").select(info.frequencyUnit);
