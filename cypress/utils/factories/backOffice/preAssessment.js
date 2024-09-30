@@ -24,9 +24,9 @@ function generatePreAssessmentDetails(info) {
   return {
     name: info.name || faker.person.firstName(),
     status: info.status || "Active",
-    BMICalculator: faker.helpers.arrayElement(["Yes", "No"]),
-    minimumPassingScore: faker.number.int({ min: 10, max: 50 }),
-    minimumBMI: faker.number.int({ min: 10, max: 50 }),
+    BMICalculator: info.BMICalculator || "Yes",
+    minimumPassingScore: faker.number.int({ min: 10, max: 100 }),
+    minimumBMI: faker.number.int({ min: 10, max: 25 }),
     questionsAndAnswers: generateQuestionnaire(info.questionCount || 5),
   };
 }

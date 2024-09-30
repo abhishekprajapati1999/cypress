@@ -2,13 +2,13 @@ import { faker } from "@faker-js/faker";
 
 function generateServiceDetails(info) {
   return {
-    type: info.type || faker.helpers.arrayElement(["Service"]),
+    type: info.type || "Service",
     serviceName: "Service_" + faker.person.firstName(),
     serviceInternalName: "Service_" + faker.person.middleName(),
     status: "Active",
-    serviceDuration: faker.number.int({ min: 10, max: 60 }),
-    additionalTimePerPersion: faker.number.int({ min: 10, max: 50 }),
-    travelBufferTime: faker.number.int({ min: 10, max: 50 }),
+    serviceDuration: faker.number.int({ min: 10, max: 50 }),
+    additionalTimePerPersion: faker.number.int({ min: 1, max: 10 }),
+    travelBufferTime: faker.number.int({ min: 1, max: 30 }),
     serviceCategory: "13 service categories",
     business: info.businessName,
     tagline: faker.word.words(4),
@@ -39,8 +39,8 @@ function generateServiceDetails(info) {
       "Hormone Therapy",
       "IM",
     ]),
-    shippingAddress: faker.helpers.arrayElement(["Patient", "Business"]),
-    typeOfHCPConsultant: info.typeOfHCPConsultant || "Async",
+    shippingAddress: info.shippingAddress || "Patient",
+    typeOfHCPConsultant: info.typeOfHCPConsultant || "Sync",
     preAssessmentRequired: "Yes",
     frequencyValue: faker.number.int({ min: 10, max: 20 }),
     frequencyUnit: faker.helpers.arrayElement([
@@ -56,8 +56,8 @@ function generateServiceDetails(info) {
     needDoctorApproval: faker.helpers.arrayElement(["Yes", "No"]),
     reAssessment: info.preAssessment || "Test",
     labsRequired: "Yes",
-    labSource: "WWL",
-    CSPCommision: faker.number.int({ min: 10, max: 50 }),
+    labSource: "Access Labs",
+    testCode: "847J",
     medicationRequired: "Yes",
     ismedicationSelfAdministered: info.ismedicationSelfAdministered || "Yes",
     medicationAutoRenew: info.medicationAutoRenew || "Disable",
@@ -68,7 +68,7 @@ function generateServiceDetails(info) {
       info.programDuration || faker.number.int({ min: 1, max: 10 }),
     programDurationUnit:
       info.programDuration ||
-      faker.helpers.arrayElement(["Weeks", "Months", "Years"]),
+      "Weeks",
     dosageValue: info.dosage || faker.number.int({ min: 1, max: 10 }),
     dosageUnit: info.dosage || "mg",
     medicationSizeValue: faker.number.int({ min: 10, max: 50 }),
@@ -82,9 +82,9 @@ function generateServiceDetails(info) {
       "Days",
     ]),
     patientSpecificInformationPage: faker.word.words(4),
-    defaultCommission: faker.number.int({ min: 60, max: 100 }),
-    commissionLevelSilver: faker.number.int({ min: 60, max: 100 }),
-    commissionLevelGold: faker.number.int({ min: 60, max: 100 }),
+    defaultCommission: faker.number.int({ min: 10, max: 20 }),
+    commissionLevelSilver: faker.number.int({ min: 10, max: 20 }),
+    commissionLevelGold: faker.number.int({ min: 10, max: 20 }),
   };
 }
 module.exports = generateServiceDetails;

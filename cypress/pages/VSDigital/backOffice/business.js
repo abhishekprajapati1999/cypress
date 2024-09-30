@@ -333,6 +333,7 @@ class BusinessPage {
       .telemedicineCommissionPercentage()
       .clear()
       .type(info.telemedicineCommissionPercentage);
+      cy.wait(4000)
     this.elements.mobileBookingCommisionSave().click({ force: true });
     cy.wait(7000);
   }

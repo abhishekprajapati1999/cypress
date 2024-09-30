@@ -9,5 +9,6 @@
   "checkAllLocator": "#all",
   "continueBtnLocator": "button.btn.btn-primary",
   "inlineRadioFieldLocator": ".form-row",
-  "editorFieldLocator": "div[contenteditable='true']"
+  "editorFieldLocator": "div[contenteditable='true']",
+  "PSIPageLocator": "div[class='pt-1 col-lg-10 d-flex flex-row align-items-center'] div[aria-label='Rich Text Editor, main']"
 }

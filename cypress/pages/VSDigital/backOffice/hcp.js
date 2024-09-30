@@ -100,6 +100,10 @@ class HCPPage {
         info.candoMedicalScreenings
       )
       .check();
+    this.elements.inputField("Level 1").clear().type(info.level1);
+    this.elements.inputField("Level 2").clear().type(info.level2);
+    this.elements.inputField("Level 3").clear().type(info.level3);
+    this.elements.inputField("Level 4").clear().type(info.level4);
     this.elements.inputField("NPI Number").clear().type(info.NPINumber);
     this.elements.inputField("DEA Number").clear().type(info.DEANumber);
     this.elements.selectField("Verification").select(info.verification);
@@ -154,7 +158,7 @@ class HCPPage {
     this.elements.inputField("Biography").should("have.value", info.biography);
     this.elements.inputField("Tax ID No").should("have.value", info.taxIDNo);
     this.elements
-      .inlineRadioField("Can do Medical Screenings?", info.canDoMedicalConsult)
+      .inlineRadioField("Can do Medical Consult?", info.canDoMedicalConsult)
       .should("be.checked");
     this.elements
       .inlineRadioField(
@@ -162,6 +166,10 @@ class HCPPage {
         info.candoMedicalScreenings
       )
       .should("be.checked");
+    this.elements.inputField("Level 1").should("have.value", info.level1);
+    this.elements.inputField("Level 2").should("have.value", info.level2);
+    this.elements.inputField("Level 3").should("have.value", info.level3);
+    this.elements.inputField("Level 4").should("have.value", info.level4);
     this.elements.inputField("NPI Number").should("have.value", info.NPINumber);
     this.elements.inputField("DEA Number").should("have.value", info.DEANumber);
     this.elements

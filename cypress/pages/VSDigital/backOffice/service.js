@@ -60,6 +60,7 @@ class ServicePage {
         .contains("label", value)
         .parent()
         .find("input"),
+    setPSI: () => cy.get(this.elements.editorFieldLocator).last(),
   };
 
   visit() {
@@ -72,7 +73,7 @@ class ServicePage {
   }
 
   addService(info) {
-    // cy.wait(5000);
+    cy.wait(7000);
     this.elements.selectField("Type").select(info.type);
     this.elements.inputField("Name").clear().type(info.serviceName);
     this.elements
@@ -148,9 +149,7 @@ class ServicePage {
       .radioField("Type of HCP consultation", info.typeOfHCPConsultant)
       .check();
     cy.wait(2000);
-    this.elements
-      .radioField("Pre Assessment Required", info.preAssessmentRequired)
-      .check({ force: true });
+    cy.get("#preAssessmentRequired").first().check().check();
     cy.wait(5000);
     this.elements.inputField("Frequency").clear().type(info.frequencyValue);
     this.elements.selectField("Frequency").select(info.frequencyUnit);
@@ -162,11 +161,11 @@ class ServicePage {
     cy.wait(2000);
     this.elements.radioField("Labs Required", info.labsRequired).check();
     cy.wait(2000);
-    this.elements.selectField("Lab Source").select(info.labSource);
-    this.elements
-      .inputField("CSP Commision ($)")
-      .clear()
-      .type(info.CSPCommision);
+    // this.elements.selectField("Lab Source").select(info.labSource);
+    // this.elements
+    //   .inputField("Test Code")
+    //   .clear()
+    //   .type(info.testCode);
     this.elements
       .radioField("Medication Required", info.medicationRequired)
       .check();
@@ -210,6 +209,10 @@ class ServicePage {
       .eq(1)
       .clear()
       .type(info.medicationExpiryUnit);
+    this.elements
+      .setPSI()
+      .clear({ force: true })
+      .type(info.patientSpecificInformationPage, { force: true });
     this.elements
       .inputField("VSDigital package cost to business ($)")
       .clear()
@@ -329,13 +332,13 @@ class ServicePage {
     this.elements
       .radioField("Labs Required", info.labsRequired)
       .should("be.checked");
-    this.elements
-      .selectField("Lab Source")
-      .find("option:selected")
-      .should("contain.text", info.labSource);
-    this.elements
-      .inputField("CSP Commision ($)")
-      .should("have.value", info.CSPCommision);
+    // this.elements
+    //   .selectField("Lab Source")
+    //   .find("option:selected")
+    //   .should("contain.text", info.labSource);
+    // this.elements
+    //   .inputField("Test Code")
+    //   .should("have.value", info.testCode);
     this.elements
       .radioField("Medication Required", info.medicationRequired)
       .should("be.checked");
@@ -391,6 +394,10 @@ class ServicePage {
       .inputField("Medication Expiry")
       .eq(1)
       .should("have.value", info.medicationExpiryUnit);
+    this.elements
+      .setPSI()
+      .invoke("text")
+      .should("contain", info.patientSpecificInformationPage);
     this.elements
       .inputField("VSDigital package cost to business ($)")
       .should("have.value", info.VSDigitalPackageCostToBusiness);

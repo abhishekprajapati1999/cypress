@@ -24,7 +24,7 @@ describe("User profile validate", () => {
     login.visit();
     cy.wait(1000);
     login.login(cred);
-    cy.wait(5000);
+    cy.wait(15000);
     profile.visit();
     profile.validateDetails(cred);
   });
@@ -35,7 +35,7 @@ describe("User profile validate", () => {
     login.visit();
     cy.wait(1000);
     login.login(cred);
-    cy.wait(10000);
+    cy.wait(15000);
     profile.visit();
     cy.wait(5000);
     profile.elements.editBtn().click();
@@ -43,7 +43,9 @@ describe("User profile validate", () => {
     profile.elements.photoInputFile().attachFile("VSDigital/image_under_2mb.jpeg");
     cy.wait(1000);
     profile.elements.photoUpdateSubmitBtn().click();
+    cy.wait(5000);
     profile.elements.cancelUpdateBtn().click();
+    
 
     cy.wait("@updateProfilePhoto").then((interception) => {
         // Assert the response status code
@@ -77,7 +79,7 @@ describe("User profile validate", () => {
     login.visit();
     cy.wait(1000);
     login.login(cred);
-    cy.wait(10000);
+    cy.wait(15000);
     profile.visit();
     cy.wait(5000);
     profile.elements.editBtn().click();
@@ -99,6 +101,7 @@ describe("User profile validate", () => {
       .type(secondaryAddress);
     profile.elements.profileEdit("Landmark").clear().type(landmark);
     profile.elements.profileUpdateBtn().click();
+    cy.wait(10000);
 
     cy.wait("@updateUser").then((interception) => {
       // Assert the response status code

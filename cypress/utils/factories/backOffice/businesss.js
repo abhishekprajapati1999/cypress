@@ -27,7 +27,7 @@ function generateBusinessDetails() {
       "Percentage (%)",
     ]),
     platformSeriveFeeValue: faker.number.int({ min: 10, max: 100 }),
-    allowBussinesToTakeCashPayment: "No",
+    allowBussinesToTakeCashPayment: "Yes",
     allowBusinessToAddMembership: "No",
     allowBusinessKeepMemberShipFees: "No",
     includeSubscription: "No",
@@ -41,16 +41,12 @@ function generateBusinessDetails() {
     noPaneltyUpTo2: faker.number.int({ min: 10, max: 24 }),
     bookingChanges2: faker.number.int({ min: 10, max: 100 }),
 
-    businessCommissionType: faker.helpers.arrayElement(["Gross"]),
-    businessCommissionPercentage: faker.number.int({ min: 10, max: 50 }),
-    whitelabelCommissionType: faker.helpers.arrayElement([
-      "Net Profit"
-    ]),
-    whitelabelCommissionPercentage: '100',
-    telemedicineCommissionType: faker.helpers.arrayElement([
-      "Gross",
-    ]),
-    telemedicineCommissionPercentage: faker.number.int({ min: 10, max: 50 }),
+    businessCommissionType: "Net Profit",
+    businessCommissionPercentage: 100,
+    whitelabelCommissionType: "Gross",
+    whitelabelCommissionPercentage: 0,
+    telemedicineCommissionType: "Gross",
+    telemedicineCommissionPercentage: 0,
   };
 }
 module.exports = generateBusinessDetails;
