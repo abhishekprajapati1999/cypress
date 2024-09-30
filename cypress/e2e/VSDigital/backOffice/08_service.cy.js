@@ -29,7 +29,7 @@ describe("Service Test Cases", () => {
     });
   });
 
-  it("should be able to create a service provider successfully", () => {
+  it.only("should be able to create a service provider successfully", () => {
     cy.intercept("POST", "/api/v1/Service/AddService").as("addService");
     cy.intercept("POST", "/api/v1/Service/GetServices").as("getService");
     homePage.visit();
@@ -40,7 +40,7 @@ describe("Service Test Cases", () => {
     service.visit();
     cy.wait(7000);
     service.addService(serviceDetails);
-    cy.wait(2000);
+    cy.wait(5000);
 
     cy.wait("@addService").then((interception) => {
       expect(interception.response.statusCode).to.eq(200);

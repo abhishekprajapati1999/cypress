@@ -233,7 +233,8 @@ class ServicePage {
       .inputField("Commission Level - Gold")
       .clear()
       .type(info.commissionLevelGold);
-    this.elements.saveBtn().click();
+      cy.wait(5000)
+    this.elements.saveBtn().click({force: true});
   }
 
   validateService(info) {

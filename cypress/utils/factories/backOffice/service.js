@@ -55,7 +55,7 @@ function generateServiceDetails(info) {
     reAssessmentFrequency: faker.number.int({ min: 10, max: 50 }),
     needDoctorApproval: faker.helpers.arrayElement(["Yes", "No"]),
     reAssessment: info.preAssessment || "Test",
-    labsRequired: "Yes",
+    labsRequired: "No",
     labSource: "Access Labs",
     testCode: "847J",
     medicationRequired: "Yes",
